@@ -1,0 +1,57 @@
+package net.sta.event.IPermissionHolder;
+
+import net.sta.guild.IGuildHandler;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.IPermissionHolder;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Role;
+import net.dv8tion.jda.api.entities.User;
+
+public class IPermission {
+    
+    private final IPermissionHolder ipermholder;
+    private Member member = null;
+    private User user = null; 
+    private Role role = null;
+    private final Guild guild;
+    
+    public IPermission(IPermissionHolder IPermHolder, Guild guild) {
+        if (guild == null) {
+            throw new IllegalArgumentException("Guild cannot be null");
+        }
+        this.ipermholder = IPermHolder;
+        this.guild = guild;
+        checkInputs();
+    }
+    
+    public IPermissionHolder getPermissionHolder() {
+        if (member == null) {
+            return role;
+        } else if (role == null) {
+            return member;
+        }
+        return null;    
+    }
+    
+    private void checkInputs() {
+        if (ipermholder instanceof Member) {
+            this.member = guild.getMemberById(ipermholder.getId());
+            this.user = this.member != null ? this.member.getUser() : null;
+        }
+        if (ipermholder instanceof Role) {
+            this.role = guild.getRoleById(ipermholder.getId());        
+        }
+    }
+    
+    public Role getAsRole() {
+        return role;
+    }
+    
+    public Member getAsMember() {
+        return member;
+    }
+    
+    public User getAsUser() {
+        return user;
+    }
+}
