@@ -7,27 +7,27 @@ import java.util.Arrays;
 
 public interface Message{
      default void sendMessage(String message){
-         MessageGetter.Message.getChannel().sendMessage(message).queue();
+         new MessageGetter().getMessage().getChannel().sendMessage(message).queue();
     }
 
      default void sendEmbed(MessageEmbed... emebeds){
-        MessageGetter.Message.getChannel().sendMessageEmbeds(Arrays.asList(emebeds)).queue();
+        new MessageGetter().getMessage().getChannel().sendMessageEmbeds(Arrays.asList(emebeds)).queue();
     }
      default void sendMessage(String message, Integer ChannelId){
-         MessageGetter.Message.getGuild().getTextChannelById(ChannelId).sendMessage(message).queue();
+         new MessageGetter().getMessage().getGuild().getTextChannelById(ChannelId).sendMessage(message).queue();
     }
      default void sendEmbed(Integer ChannelId, MessageEmbed... emebeds){
-         MessageGetter.Message.getGuild().getTextChannelById(ChannelId).sendMessageEmbeds(Arrays.asList(emebeds)).queue();
+         new MessageGetter().getMessage().getGuild().getTextChannelById(ChannelId).sendMessageEmbeds(Arrays.asList(emebeds)).queue();
     }
 
     default Boolean startsWith(String string){
-         if (string.startsWith(String.valueOf(MessageGetter.Message.getContentRaw()))) {
+         if (string.startsWith(String.valueOf(new MessageGetter().getMessage().getContentRaw()))) {
              return true;
          }
          return false;
     }
     default Boolean equals(String string){
-         if (string.equals(String.valueOf(MessageGetter.Message.getContentRaw()))){
+         if (string.equals(String.valueOf(new MessageGetter().getMessage().getContentRaw()))){
              return true;
          }
         return false;

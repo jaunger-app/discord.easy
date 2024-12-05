@@ -1,6 +1,6 @@
 package test;
 
-import net.sta.commands.levelCommand;
+import net.sta.commands.Levelcommand;
 import net.sta.event.level.LevelEvent;
 import net.sta.event.listener.EventAdapter;
 import net.sta.BotManager;
@@ -22,7 +22,7 @@ public class testMain extends EventAdapter {
         BotManager b = new BotManager("MTA1NjM0NDA5OTM2OTc4NzQ3Mw.GZNrKS.ZKx_v7J7wqFF6dTbB6AGqOxfB8qzmG06Thgkjs", Activity.watching("to the Moon"), OnlineStatus.ONLINE);
         Object[] events = {
                 new testMain(),
-                new levelCommand()
+                new Levelcommand()
         };
 
 

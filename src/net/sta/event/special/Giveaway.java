@@ -26,7 +26,7 @@ public class Giveaway extends GiveawayTimeManager {
 
     public void Start(){
         startTimer(timeString);
-        String msgId = "";
+        String msgId = " ";
         if (textchannel != null){
             msgId = textchannel.sendMessageEmbeds(Embed).addActionRow(Buttons()).complete().getId();
         } else if (textchannelId != null) {

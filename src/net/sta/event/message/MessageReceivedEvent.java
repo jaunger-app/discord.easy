@@ -8,7 +8,7 @@ import net.sta.event.events.Event;
 @Getter
 public class MessageReceivedEvent extends Event implements net.sta.event.message.Message {
 
-    public Message message = MessageGetter.Message;
+    private final Message message = new MessageGetter().getMessage();
     public MessageReceivedEvent(JDA jda) {
         super(jda);
     }

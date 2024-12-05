@@ -11,12 +11,12 @@ public class TextChannelListObject {
 	
 	
 	@Getter private Permission permission;
-	@Getter private final IPermissionHolder ipermisionholder;
-	@Getter private final Boolean isAllowed;
+	@Getter private final IPermissionHolder iPermisionHolder;
+	@Getter private final Boolean bool;
 	
-	public TextChannelListObject(Permission permission, IPermissionHolder Ipmerissionholder, Boolean isAllow){
+	public TextChannelListObject(Permission permission, IPermissionHolder iPermissionHolder, Boolean bool){
 		this.permission = permission;
-		this.ipermisionholder = Ipmerissionholder;
-		isAllowed = isAllow;
+		this.iPermisionHolder = iPermissionHolder;
+		this.bool = bool;
 	}
 }

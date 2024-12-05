@@ -3,11 +3,12 @@ package net.sta.event.level;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.guild.voice.GuildVoiceUpdateEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.sta.event.listener.VoiceLevel;
 import net.sta.managers.XpManager;
 
 import java.util.ArrayList;
 import java.util.List;
-public class VoiceLevel extends ListenerAdapter implements net.sta.event.level.Manager.VoiceLevel, XpManager {
+public class SetvoiceLevel extends ListenerAdapter implements VoiceLevel, XpManager {
     List<Member> memberList = new ArrayList<>();
 
     @Override

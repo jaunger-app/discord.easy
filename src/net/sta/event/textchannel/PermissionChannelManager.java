@@ -22,8 +22,8 @@ public class PermissionChannelManager {
 		this.categoryId = categoryId;
 	}
 
-	public PermissionChannelManager setPermissions(Permission Permission, Boolean Allow, IPermissionHolder holder) {
-		TextChannelListObject.textChannelList.add(new TextChannelListObject(Permission, holder, Allow));
+	public PermissionChannelManager setPermissions(Permission permission, Boolean bool, IPermissionHolder holder) {
+		TextChannelListObject.textChannelList.add(new TextChannelListObject(permission, holder, bool));
 		return this;
 	}
 
@@ -38,29 +38,27 @@ public class PermissionChannelManager {
 			action = guild.getCategoryById(categoryId).createTextChannel(textChannelName);
 		}else {
 		assert !list.isEmpty();
-		for(TextChannelListObject object : list) {
-			if (object.getIsAllowed()) {
-				allowedPermissions.add(object.getPermission());
-			}else deniedPermissions.add(object.getPermission());
+		for(TextChannelListObject textChannelListObject : list) {
+			if (Boolean.TRUE.equals(textChannelListObject.getIsAllowed())) {
+				allowedPermissions.add(textChannelListObject.getPermission());
+			}else deniedPermissions.add(textChannelListObject.getPermission());
 
-			action.addPermissionOverride(object.getIpermisionholder(), allowedPermissions, deniedPermissions);
+			action.addPermissionOverride(textChannelListObject.getIpermisionholder(), allowedPermissions, deniedPermissions);
 			}
 			list.remove(0);
 			allowedPermissions.clear();
 			deniedPermissions.clear();
 		}
-		// ey dw geh mal in TextchannelCreate kann ich das ned eig zu einem Interface machen ? Hallo lebst du noch?! ne
 		textChannel = action.complete();
 		ticketId.add(textChannel.getId());
-		System.out.println("et");
 		return textChannel;
 	}
-	public static TextChannel getTextChannelById(String TextChannelID, Guild guild) {
-		return guild.getTextChannelById(TextChannelID);
+	public static TextChannel getTextChannelById(String textChannelID, Guild guild) {
+		return guild.getTextChannelById(textChannelID);
 	}
 
-	public PermissionChannelManager setName(String TextChannelName) {
-		this.textChannelName = TextChannelName;
+	public PermissionChannelManager setName(String textChannelName) {
+		this.textChannelName = textChannelName;
 		return this;
 	}
 

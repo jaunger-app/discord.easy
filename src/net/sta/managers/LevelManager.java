@@ -1,8 +1,8 @@
 package net.sta.managers;
 
 import net.dv8tion.jda.api.entities.Member;
-import net.sta.event.level.Manager.MessageLevel;
-import net.sta.event.level.Manager.VoiceLevel;
+import net.sta.event.listener.MessageLevel;
+import net.sta.event.listener.VoiceLevel;
 
 import java.util.ConcurrentModificationException;
 import java.util.HashMap;

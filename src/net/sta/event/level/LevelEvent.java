@@ -5,13 +5,13 @@ import net.sta.managers.LevelManager;
 @SuppressWarnings("unused")
 public class LevelEvent extends LevelManager {
     Boolean bool;
-    public LevelEvent(Boolean Voice){
-        this.bool = Voice;
+    public LevelEvent(Boolean voice){
+        this.bool = voice;
     }
    public void startLevel(){
         LevelManager manager = new LevelManager();
         manager.XpTimer();
-        if (bool)
+        if (Boolean.TRUE.equals(bool))
             manager.VoiceXpTimer();
    }
 }

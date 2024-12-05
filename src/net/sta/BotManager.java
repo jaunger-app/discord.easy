@@ -11,7 +11,7 @@ import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import net.sta.event.EventPublisher;
-import net.sta.event.level.VoiceLevel;
+import net.sta.event.level.SetvoiceLevel;
 import net.sta.event.message.MessageGetter;
 
 import java.util.Objects;
@@ -53,7 +53,7 @@ public class BotManager extends EventPublisher implements Debugging{
 
         //needed for Levelsystem
         builder.addEventListeners(new MessageGetter());
-        builder.addEventListeners(new VoiceLevel());
+        builder.addEventListeners(new SetvoiceLevel());
 
         bot = builder.build();
 
