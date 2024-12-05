@@ -2,12 +2,8 @@ package net.sta.guild;
 
 import lombok.AccessLevel;
 import lombok.Setter;
-import net.sta.managers.BotManager;
+import net.sta.BotManager;
 import net.dv8tion.jda.api.entities.Guild;
-
-import java.security.SecureClassLoader;
-import java.util.ArrayList;
-import java.util.List;
 
 public class IGuildHandler {
 	

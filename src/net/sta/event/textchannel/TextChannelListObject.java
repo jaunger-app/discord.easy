@@ -1,7 +1,7 @@
 package net.sta.event.textchannel;
 
 import java.util.ArrayList;
-import lombok.Getter;;
+import lombok.Getter;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.IPermissionHolder;
 

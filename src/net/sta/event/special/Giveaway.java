@@ -4,9 +4,8 @@ import lombok.Setter;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
+import net.sta.BotManager;
 import net.sta.managers.GiveawayTimeManager;
-
-import static net.sta.managers.BotManager.jda;
 
 public class Giveaway extends GiveawayTimeManager {
 
@@ -31,7 +30,7 @@ public class Giveaway extends GiveawayTimeManager {
         if (textchannel != null){
             msgId = textchannel.sendMessageEmbeds(Embed).addActionRow(Buttons()).complete().getId();
         } else if (textchannelId != null) {
-            msgId = jda.getTextChannelById(textchannelId).sendMessageEmbeds(Embed).setActionRow(Buttons()).complete().getId();
+            msgId = BotManager.getBot().getTextChannelById(textchannelId).sendMessageEmbeds(Embed).setActionRow(Buttons()).complete().getId();
         }
     }
 
