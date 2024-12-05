@@ -1,0 +1,31 @@
+name: Publish Maven Package
+
+on:
+  push:
+    branches:
+      - main  # Ausführung bei Pushes auf den Branch "main"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Checkout the repository
+    - name: Check out code
+      uses: actions/checkout@v3
+
+    # Set up Java (z.B. JDK 17)
+    - name: Set up JDK
+      uses: actions/setup-java@v3
+      with:
+        java-version: 20
+        distribution: 'temurin'
+        cache: maven
+
+    # Authenticate with GitHub Packages
+    - name: Authenticate with GitHub Packages
+      run: echo "<settings><servers><server><id>github</id><username>${{ github.actor }}</username><password>${{ secrets.GITHUB_TOKEN }}</password></server></servers></settings>" > $HOME/.m2/settings.xml
+
+    # Build the project and deploy
+    - name: Build and Publish
+      run: mvn deploy -DskipTests
