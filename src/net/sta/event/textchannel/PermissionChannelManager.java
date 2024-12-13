@@ -43,7 +43,9 @@ public class PermissionChannelManager {
 				allowedPermissions.add(textChannelListObject.getPermission());
 			}else deniedPermissions.add(textChannelListObject.getPermission());
 
-			action.addPermissionOverride(textChannelListObject.getIpermisionholder(), allowedPermissions, deniedPermissions);
+
+			TextChannelListObject.
+			action.addPermissionOverride(TextChannelListObject.getIpermisionholder(), allowedPermissions, deniedPermissions);
 			}
 			list.remove(0);
 			allowedPermissions.clear();

@@ -10,9 +10,9 @@ public class TextChannelListObject {
 	public static ArrayList<TextChannelListObject> textChannelList = new ArrayList<>();
 	
 	
-	@Getter private Permission permission;
-	@Getter private final IPermissionHolder iPermisionHolder;
-	@Getter private final Boolean bool;
+	@Getter Permission permission;
+	@Getter final IPermissionHolder iPermisionHolder;
+	@Getter final Boolean bool;
 	
 	public TextChannelListObject(Permission permission, IPermissionHolder iPermissionHolder, Boolean bool){
 		this.permission = permission;
