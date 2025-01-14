@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Event implements Guilds {
 
-    public JDA api;
+    private JDA api;
 
     public Event(JDA jda){this.api=jda;}
     public JDA getJDA() {

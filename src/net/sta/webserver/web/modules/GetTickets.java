@@ -1,20 +1,18 @@
 package net.sta.webserver.web.modules;
 
+import com.mysql.cj.xdevapi.DatabaseObject;
 import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.channel.concrete.Category;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
-import net.dv8tion.jda.internal.entities.ReceivedMessage;
+import net.sta.BotManager;
 
 import java.util.List;
 
-import static net.sta.managers.BotManager.jda;
 
 public class GetTickets {
 
 
     public static Integer TicketAmount = 0;
-    static Guild guild = jda.getGuilds().get(0);
+    static Guild guild = BotManager.getBot().getGuilds().get(0);
 
 
     public static List<TextChannel> getTicket(String TicketCategoryName){

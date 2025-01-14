@@ -1,7 +1,8 @@
 package net.sta.webserver.web.modules;
 import net.dv8tion.jda.api.entities.Member;
+import net.sta.BotManager;
+
 import java.time.Instant;
-import static net.sta.managers.BotManager.jda;
 
 public class KickUser {
 
@@ -18,11 +19,11 @@ public class KickUser {
 
 
     private void userGetKicked(){
-        Member member = jda.getGuilds().get(0).getMemberById(uuid);
+        Member member = BotManager.getBot().getGuilds().get(0).getMemberById(uuid);
         member.kick(reason).queue();
 
         if (ChannelId != null){
-            jda.getGuilds().get(0).getTextChannelById("1037868392117436488").sendMessage("User: " + member.getEffectiveName() + " wurde gekickt am " + Instant.now()).queue();
+            BotManager.getBot().getGuilds().get(0).getTextChannelById("1037868392117436488").sendMessage("User: " + member.getEffectiveName() + " wurde gekickt am " + Instant.now()).queue();
         }
 
     }

@@ -1,4 +1,4 @@
-package net.sta.managers;
+package net.sta;
 
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -11,28 +11,31 @@ import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import net.sta.event.EventPublisher;
-import net.sta.event.level.MessageLevel;
-import net.sta.event.level.VoiceLevel;
+import net.sta.event.level.SetvoiceLevel;
 import net.sta.event.message.MessageGetter;
 
 import java.util.Objects;
 
-public class BotManager extends EventPublisher {
+public class BotManager extends EventPublisher implements Debugging{
 	
-	public static JDA jda;
-	
-    private final Activity ACTIVITY;
-    private final OnlineStatus ONLINESTATUS;
+	private static JDA bot;
+    private String prefix;
 
-    public static String Prefix;
-
-    public BotManager(String token, Activity activity, OnlineStatus onlineStatus) {
-        this.ACTIVITY = activity;
-        this.ONLINESTATUS = onlineStatus;
-        createBot(token);
+    public void setPrefix(String prefix){
+        this.prefix = prefix;
+    }
+    public String getPrefix() {
+        return this.prefix == null ? "!" : this.prefix;
+    }
+    public static JDA getBot() {
+        return bot == null ? null : bot;
     }
 
-    protected void createBot(String token)  {
+    public BotManager(String token, Activity activity, OnlineStatus onlineStatus) {
+        createBot(token, onlineStatus, activity);
+    }
+
+    private static void createBot(String token, OnlineStatus onlineStatus, Activity activity)  {
         JDABuilder builder = JDABuilder.createDefault(token);
 
         builder.setChunkingFilter(ChunkingFilter.ALL);
@@ -45,30 +48,26 @@ public class BotManager extends EventPublisher {
                 GatewayIntent.MESSAGE_CONTENT,
                 GatewayIntent.GUILD_INVITES);
         builder.enableCache(CacheFlag.ONLINE_STATUS);
-        builder.setStatus(ONLINESTATUS == null ? OnlineStatus.ONLINE : ONLINESTATUS);      
-        builder.setActivity(ACTIVITY == null ? Activity.watching("Developer Salzstange") : ACTIVITY);
+        builder.setStatus(onlineStatus == null ? OnlineStatus.ONLINE : onlineStatus);
+        builder.setActivity(activity== null ? Activity.watching("Developer Salzstange") : activity);
 
-        //Wird benötigt um das LevelSystem zu benutzen.
+        //needed for Levelsystem
         builder.addEventListeners(new MessageGetter());
-        builder.addEventListeners(new VoiceLevel());
+        builder.addEventListeners(new SetvoiceLevel());
 
-        jda = builder.build();
+        bot = builder.build();
 
 
 
         try {
             Thread.sleep(650);
-        }catch (InterruptedException ignored){
+        }catch (InterruptedException e){
+            Thread.currentThread().interrupt();
         }
 
     }
 
 
-
-
-    public void setPrefix(String prefix){
-        Prefix = prefix;
-    }
 
     @SuppressWarnings("unused")
     public CommandEditAction upsertGuildCommand(String name, String desc, Object eventListener) {
@@ -81,9 +80,10 @@ public class BotManager extends EventPublisher {
                 return cmd.editCommand();
             }
         } catch (InterruptedException e) {
-            System.err.println(e.getMessage());
-            return null;
+            debug().info(e.getMessage());
+            Thread.currentThread().interrupt();
         }
+        return null;
     }
 
 }

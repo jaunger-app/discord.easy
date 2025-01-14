@@ -7,14 +7,8 @@ import java.util.TimerTask;
 
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
-import net.dv8tion.jda.internal.entities.ReceivedMessage;
-import net.sta.managers.BotManager;
 import net.sta.webserver.web.modules.GetTickets;
-import okhttp3.internal.concurrent.Task;
-
-import static net.sta.managers.BotManager.jda;
 
 public class ToJson {
 	

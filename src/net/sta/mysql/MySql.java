@@ -1,37 +1,37 @@
 package net.sta.mysql;
 
 import lombok.Getter;
+import net.sta.Debugging;
 
 import java.sql.*;
 
-public class MySql {
-	@Getter public static Connection con;
+public class MySql implements Debugging {
+	@Getter public Connection con;
 	@Getter private final String host;
 	@Getter private final String port;
 	@Getter private final String database;
 	@Getter private final String username;
 	@Getter private final String password;
 
-	public MySql(String Host, String Port, String Database, String Username, String Password) {
-		this.host = Host;
-		this.port = Port;
-		this.database = Database;
-		this.username = Username;
-		this.password = Password;
-		MySqlconnection();
+	public MySql(String host, String port, String database, String username, String password) {
+		this.host = host;
+		this.port = port;
+		this.database = database;
+		this.username = username;
+		this.password = password;
+		mysqlConnection();
 	}
 
-	private void MySqlconnection() {
+	private void mysqlConnection() {
 		if (!isConnected()) {
 			try {
-				con = DriverManager.getConnection("jdbc:net.sta.mysql://" + host + ":" + port + "/" + database, username,
-						password);
-				System.out.println("[MySql] connect");
+				con = DriverManager.getConnection("jdbc:net.sta.mysql://" + host + ":" + port + "/" + database, username, password);
+				debug().info("Mysql connection established.");
 			} catch (SQLException e) {
-				System.out.println(e.getMessage());
+				debug().info("Mysql connection failed: " + e.getMessage());
 			}
 		} else {
-			System.err.println("connection failed Please check your connection");
+			debug().info("Mysql connection is already established.");
 		}
 	}
 

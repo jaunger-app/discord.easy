@@ -9,16 +9,21 @@ import static net.sta.event.EventPublisher.listeners;
 
 public class MessageGetter extends ListenerAdapter {
 
-	public static Message Message = null;
+	public MessageGetter() {/*neded for Message*/}
+
+	private Message message;
 	@Override
 	public void onMessageReceived(MessageReceivedEvent event) {
-		Message = event.getMessage();
-		System.out.println(Message);
+		message = event.getMessage();
 		if (!event.getAuthor().isBot()){
 			for (EventListener listener : listeners) {
 				listener.onMessageReceivedEvent(new net.sta.event.message.MessageReceivedEvent(event.getJDA()));
 			}
 		}
 
+	}
+
+	public Message getMessage() {
+		return message;
 	}
 }

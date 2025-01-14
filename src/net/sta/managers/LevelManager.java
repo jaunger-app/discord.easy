@@ -1,17 +1,19 @@
 package net.sta.managers;
 
 import net.dv8tion.jda.api.entities.Member;
-import net.sta.event.level.Manager.MessageLevel;
-import net.sta.event.level.Manager.VoiceLevel;
+import net.sta.Debugging;
+import net.sta.event.listener.MessageLevel;
+import net.sta.event.listener.VoiceLevel;
 
 import java.util.ConcurrentModificationException;
 import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Level;
 
-public class LevelManager implements MessageLevel, VoiceLevel, XpManager {
+public class LevelManager implements MessageLevel, VoiceLevel, XpManager, Debugging {
 
-    public static HashMap<Member, Integer> playerXP = new HashMap<>();
+    protected final static HashMap<Member, Integer> playerXP = new HashMap<>();
 
     public void XpTimer(){
         TimerTask timerTask = new TimerTask() {
@@ -24,7 +26,7 @@ public class LevelManager implements MessageLevel, VoiceLevel, XpManager {
                                 playerMessageTimer.remove(member);
                         }
                     }
-                }catch (ConcurrentModificationException | NullPointerException ignored){}
+                }catch (ConcurrentModificationException | NullPointerException ignored){/*ignorieren*/}
             }
         };
         new Timer().schedule(timerTask, 1000, 1000);
@@ -38,7 +40,7 @@ public class LevelManager implements MessageLevel, VoiceLevel, XpManager {
 
                 for (Member member : playerVoiceTimer.keySet()) {
                         randXp(member, 10);
-                        System.out.println("VoicePlayerTime " + getVoicePlayerTime(member));
+                        debug().log(Level.INFO, "PlayerVoiceTimer");
                 }
             }
             //jede 10 sekunden

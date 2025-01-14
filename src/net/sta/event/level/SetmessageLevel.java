@@ -1,12 +1,13 @@
 package net.sta.event.level;
 
 import net.sta.event.listener.EventAdapter;
+import net.sta.event.listener.MessageLevel;
 import net.sta.event.message.MessageReceivedEvent;
 import net.sta.managers.XpManager;
 import org.jetbrains.annotations.NotNull;
 
 
-public class MessageLevel extends EventAdapter implements net.sta.event.level.Manager.MessageLevel, XpManager {
+public class SetmessageLevel extends EventAdapter implements MessageLevel, XpManager {
     @Override
     public void onMessageReceivedEvent(@NotNull MessageReceivedEvent event) {
         if (event.getMessage().getAuthor().isBot())return;
